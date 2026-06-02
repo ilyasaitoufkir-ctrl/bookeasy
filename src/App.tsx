@@ -15,6 +15,9 @@ import SettingsPage from './pages/business/SettingsPage';
 import SearchPage from './pages/customer/SearchPage';
 import MyBookingsPage from './pages/customer/MyBookingsPage';
 import BusinessPublicPage from './pages/public/BusinessPublicPage';
+import AdminLoginPage from './pages/admin/AdminLoginPage';
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminCreatePage from './pages/admin/AdminCreatePage';
 
 function PrivateRoute({ children, role: requiredRole }: { children: React.ReactNode; role?: 'business' | 'customer' }) {
   const { user, role, loading } = useAuth();
@@ -71,6 +74,12 @@ export default function App() {
       <Route path="/my-bookings" element={
         <PrivateRoute role="customer"><MyBookingsPage /></PrivateRoute>
       } />
+
+      {/* Admin panel */}
+      <Route path="/admin" element={<AdminLoginPage />} />
+      <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+      <Route path="/admin/create" element={<AdminCreatePage />} />
+      <Route path="/admin/edit/:id" element={<AdminCreatePage />} />
 
       {/* Public business pages (White Label) */}
       <Route path="/:slug" element={<BusinessPublicPage />} />

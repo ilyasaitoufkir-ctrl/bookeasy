@@ -73,6 +73,11 @@ export async function searchBusinesses(query_str: string, category?: string): Pr
   });
 }
 
+export async function getAllBusinesses(): Promise<Business[]> {
+  const snap = await getDocs(collection(db, 'businesses'));
+  return snap.docs.map(d => convertBusiness(d.data() as Business));
+}
+
 export async function updateBusiness(id: string, data: Partial<Business>): Promise<void> {
   await updateDoc(doc(db, 'businesses', id), { ...data });
 }

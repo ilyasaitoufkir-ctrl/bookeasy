@@ -3,6 +3,7 @@ export type BookingStatus = 'pending' | 'confirmed' | 'cancelled' | 'completed';
 export type PaymentMethod = 'online' | 'onsite';
 export type PaymentStatus = 'pending' | 'paid' | 'refunded';
 export type Plan = 'free' | 'basic' | 'pro';
+export type TemplateId = 'kosmetik' | 'friseur' | 'massage';
 
 export interface AppUser {
   id: string;
@@ -30,6 +31,8 @@ export interface Business {
   plan: Plan;
   stripeCustomerId?: string;
   monthlyBookingCount: number;
+  template?: TemplateId;
+  isActive?: boolean;
   createdAt: Date;
 }
 
