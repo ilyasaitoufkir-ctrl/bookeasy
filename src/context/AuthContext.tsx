@@ -18,16 +18,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
-      if (firebaseUser) {
-        const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
-        setRole(snap.exists() ? (snap.data().role as UserRole) : null);
-      } else {
-        setRole(null);
-      }
+    let unsubscribe: () => void;
+    try {
+      unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+        setUser(firebaseUser);
+        if (firebaseUser) {
+          try {
+            const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
+            setRole(snap.exists() ? (snap.data().role as UserRole) : null);
+          } catch {
+            setRole(null);
+          }
+        } else {
+          setRole(null);
+        }
+        setLoading(false);
+      }, () => {
+        // onAuthStateChanged error handler – e.g. invalid API key
+        setLoading(false);
+      });
+    } catch {
       setLoading(false);
-    });
+    }
+    return () => unsubscribe?.();
   }, []);
 
   return <AuthContext.Provider value={{ user, role, loading }}>{children}</AuthContext.Provider>;
