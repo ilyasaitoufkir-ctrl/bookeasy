@@ -1,25 +1,39 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Sparkles, Star, Clock, CheckCircle2, ChevronRight, Menu, X,
-  Flower2, Eye, HandMetal, Brush, Gem, Scissors,
+  Sparkles, Star, CheckCircle2, ChevronRight, Menu, X,
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 const NAV_LINKS = [
-  { label: 'Services',  href: '#services'  },
+  { label: 'Templates', href: '#templates' },
   { label: 'Vorteile',  href: '#features'  },
   { label: 'Preise',    href: '#pricing'   },
   { label: 'Buchen',    href: '/search'    },
 ];
 
-const SERVICES = [
-  { icon: <Flower2   size={22} />, name: 'Gesichtsbehandlung', desc: 'Tiefenreinigung, Peeling & Maske für strahlende Haut', time: '60 min', price: 'ab 65 €', color: 'from-rose-100 to-cream-200' },
-  { icon: <HandMetal size={22} />, name: 'Maniküre & Nägel',   desc: 'Klassisch, Shellac oder Gel – Nägel die strahlen',    time: '45 min', price: 'ab 35 €', color: 'from-cream-200 to-rose-100' },
-  { icon: <Eye       size={22} />, name: 'Wimpernverlängerung', desc: 'Voluminöse, natürliche Wimpern für jeden Typ',         time: '90 min', price: 'ab 79 €', color: 'from-mauve-100 to-cream-200' },
-  { icon: <Brush     size={22} />, name: 'Make-up & Styling',   desc: 'Perfektes Make-up für jeden Anlass',                  time: '45 min', price: 'ab 55 €', color: 'from-rose-100 to-mauve-100' },
-  { icon: <Gem       size={22} />, name: 'Pediküre & Spa',      desc: 'Verwöhnprogramm für schöne, gepflegte Füße',         time: '60 min', price: 'ab 45 €', color: 'from-cream-300 to-rose-100' },
-  { icon: <Scissors  size={22} />, name: 'Augenbrauen',          desc: 'Zupfen, Färben oder Henna Brows',                   time: '30 min', price: 'ab 25 €', color: 'from-rose-100 to-cream-300' },
+const TEMPLATES_PREVIEW = [
+  {
+    emoji: '💆', name: 'Kosmetik & Beauty',
+    desc: 'Elegantes Rosé Gold & Creme Design – für Beautystudios, Nagelstudios, Wimpernstudios',
+    accent: '#c9a99a', bg: '#fdf6f0', text: '#3d2b2b',
+    gradient: 'linear-gradient(135deg, #c9a99a 0%, #b8887a 50%, #fdf6f0 100%)',
+    preview: ['Gesichtsbehandlung · 60 min · 65 €', 'Maniküre Gel · 45 min · 45 €', 'Wimpern Extensions · 90 min · 79 €'],
+  },
+  {
+    emoji: '✂️', name: 'Friseur & Barbershop',
+    desc: 'Sleek Schwarz & Gold Design – für Friseursalons, Barbershops, Styling-Studios',
+    accent: '#d4a843', bg: '#111111', text: '#f5f5f5',
+    gradient: 'linear-gradient(135deg, #111111 0%, #1c1c1c 50%, #d4a843 100%)',
+    preview: ['Herrenhaarschnitt · 30 min · 28 €', 'Bart Trimmen & Fade · 45 min · 35 €', 'Color & Style · 90 min · 75 €'],
+  },
+  {
+    emoji: '🧘', name: 'Massage & Wellness',
+    desc: 'Natürliches Salbei & Beige Design – für Massagepraxen, Wellnessstudios, Physio',
+    accent: '#5b8c5a', bg: '#f5f0e8', text: '#2e4a2e',
+    gradient: 'linear-gradient(135deg, #5b8c5a 0%, #8ab07f 50%, #f5f0e8 100%)',
+    preview: ['Rückenmassage · 60 min · 70 €', 'Hot Stone Massage · 90 min · 95 €', 'Lymphdrainage · 45 min · 55 €'],
+  },
 ];
 
 const STATS = [
@@ -132,21 +146,21 @@ export default function LandingPage() {
           <div className="text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs text-rose-700 font-medium mb-6 border border-rose-200/60 shadow-sm">
               <Sparkles size={12} className="text-rose-500" />
-              Das Buchungssystem für Beauty Studios
+              Buchungssystem · 3 Templates · Sofort live
             </div>
 
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-tight text-mauve-900 mb-2">
-              Your Beauty
+              Online buchen.
             </h1>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-tight text-rose-500 italic mb-6">
-              Studio
+              Professionell.
             </h1>
             <p className="text-lg text-mauve-500 mb-3 font-light tracking-wide">
-              Beautiful Inside &amp; Out
+              Kosmetik · Friseur · Massage
             </p>
             <p className="text-mauve-400 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Das elegante Online-Buchungssystem für Kosmetik, Nail Art, Wimpern
-              und alle Beauty-Services. Deine Kunden buchen 24/7 – du glänzt.
+              Das elegante Buchungssystem mit 3 vorgefertigten Designs für Kosmetikstudios,
+              Friseursalons und Massagepraxen. In 5 Minuten live – kein Login für Kunden nötig.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
@@ -231,41 +245,49 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Services ───────────────────────────────────────────────────── */}
-      <section id="services" className="py-24 bg-beauty-gradient">
+      {/* ── Templates ──────────────────────────────────────────────────── */}
+      <section id="templates" className="py-24 bg-beauty-gradient">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <p className="text-xs font-medium text-rose-500 uppercase tracking-widest mb-3">Dienstleistungen</p>
+            <p className="text-xs font-medium text-rose-500 uppercase tracking-widest mb-3">3 Designs inklusive</p>
             <h2 className="font-display text-4xl sm:text-5xl font-semibold text-mauve-900">
-              Services für dich
+              Für jede Branche<br />das perfekte Design
             </h2>
             <p className="mt-4 text-mauve-400 max-w-lg mx-auto">
-              Entdecke unsere Beauty-Services und buche deinen Wunschtermin in Sekunden.
+              Wähle das passende Template – deine Kunden sehen sofort, dass du professionell bist.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SERVICES.map((s, i) => (
-              <div
-                key={s.name}
-                className="group bg-white rounded-3xl p-6 border border-cream-200 shadow-card hover:shadow-rose hover:-translate-y-1.5 transition-all duration-300"
-                style={{ animationDelay: `${i * 0.08}s` }}
-              >
-                <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center text-rose-600 mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  {s.icon}
-                </div>
-                <h3 className="font-display font-semibold text-mauve-900 mb-1.5">{s.name}</h3>
-                <p className="text-sm text-mauve-400 leading-relaxed mb-4">{s.desc}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 text-xs text-mauve-400">
-                    <span className="flex items-center gap-1"><Clock size={11} /> {s.time}</span>
-                    <span className="font-semibold text-rose-500">{s.price}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {TEMPLATES_PREVIEW.map(t => (
+              <div key={t.name} className="group rounded-3xl overflow-hidden border border-cream-200 shadow-card hover:shadow-rose-lg hover:-translate-y-1 transition-all duration-300 bg-white">
+                {/* Color header */}
+                <div className="h-3 w-full" style={{ background: t.gradient }} />
+
+                {/* Mock booking UI */}
+                <div className="p-5" style={{ backgroundColor: t.bg }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-10 w-10 rounded-xl flex items-center justify-center text-lg font-bold"
+                      style={{ background: t.gradient }}>{t.emoji}</div>
+                    <div>
+                      <p className="font-semibold text-sm" style={{ color: t.text }}>{t.name}</p>
+                      <p className="text-xs opacity-50" style={{ color: t.text }}>bookeasy.app/mein-studio</p>
+                    </div>
                   </div>
-                  <Link to="/search">
-                    <button className="text-xs font-medium text-rose-500 hover:text-rose-700 flex items-center gap-1 group/btn">
-                      Buchen <ChevronRight size={12} className="group-hover/btn:translate-x-0.5 transition-transform" />
-                    </button>
-                  </Link>
+                  <div className="space-y-1.5">
+                    {t.preview.map((item, i) => (
+                      <div key={i} className="flex items-center justify-between rounded-xl px-3 py-2 text-xs"
+                        style={{ backgroundColor: i === 0 ? t.accent + '22' : t.accent + '0a', color: t.text }}>
+                        <span className="font-medium">{item}</span>
+                        {i === 0 && <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ backgroundColor: t.accent, color: t.bg }}>Wählen</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="p-5 bg-white border-t border-cream-100">
+                  <p className="text-sm text-mauve-500 leading-relaxed">{t.desc}</p>
                 </div>
               </div>
             ))}

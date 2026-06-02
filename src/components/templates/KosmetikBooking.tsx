@@ -11,6 +11,7 @@ import { getAvailableTimeSlots, formatTime, formatDate } from '../../utils/calen
 import { formatPrice, formatDuration } from '../../utils/helpers';
 import type { Business, Service, Employee, Booking, BlockedTime as BT, TimeSlot } from '../../types';
 import toast from 'react-hot-toast';
+import { sendBookingConfirmation } from '../../services/sendEmail';
 
 type Step = 'service' | 'employee' | 'datetime' | 'details' | 'confirmed';
 
@@ -80,6 +81,7 @@ export default function KosmetikBooking({ business }: { business: Business }) {
         totalAmount: selSvc.price, notes: details.notes,
       });
       setConfirmed(booking); setStep('confirmed');
+      sendBookingConfirmation(booking, business);
     } catch { toast.error('Fehler beim Buchen. Bitte erneut versuchen.'); }
     finally { setSaving(false); }
   }

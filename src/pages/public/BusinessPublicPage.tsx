@@ -43,6 +43,21 @@ export default function BusinessPublicPage() {
     );
   }
 
+  if (business.isActive === false) {
+    return (
+      <div className="min-h-screen bg-cream-100 flex items-center justify-center p-4">
+        <div className="text-center max-w-sm">
+          <div className="text-5xl mb-5">🔒</div>
+          <h2 className="font-serif text-xl font-semibold text-mauve-800 mb-2">{business.name}</h2>
+          <p className="text-mauve-400 text-sm leading-relaxed">
+            Dieses Studio nimmt momentan keine Online-Buchungen entgegen.
+            {business.phone && <> Bitte rufen Sie uns an: <a href={`tel:${business.phone}`} className="text-rose-500 font-medium">{business.phone}</a></>}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   switch (business.template) {
     case 'friseur':  return <FriseurBooking  business={business} />;
     case 'massage':  return <MassageBooking  business={business} />;

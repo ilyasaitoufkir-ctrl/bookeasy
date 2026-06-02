@@ -51,7 +51,13 @@ export default function AdminDashboardPage() {
             <p className="text-dark-400 text-xs">{businesses.length} Businesses</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => navigate('/admin/bookings')}
+            className="text-dark-400 hover:text-white px-3 py-2 rounded-xl text-sm transition"
+          >
+            📅 Buchungen
+          </button>
           <button
             onClick={() => navigate('/admin/create')}
             className="bg-gold-gradient text-dark-900 font-semibold px-4 py-2 rounded-xl text-sm hover:opacity-90 transition"
@@ -60,7 +66,7 @@ export default function AdminDashboardPage() {
           </button>
           <button
             onClick={logout}
-            className="text-dark-400 hover:text-white px-4 py-2 rounded-xl text-sm transition"
+            className="text-dark-400 hover:text-white px-3 py-2 rounded-xl text-sm transition"
           >
             Logout
           </button>
