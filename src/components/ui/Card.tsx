@@ -5,16 +5,18 @@ interface CardProps {
   children: ReactNode;
   className?: string;
   hover?: boolean;
+  glass?: boolean;
   onClick?: () => void;
 }
 
-export function Card({ children, className, hover, onClick }: CardProps) {
+export function Card({ children, className, hover, glass, onClick }: CardProps) {
   return (
     <div
       onClick={onClick}
       className={cn(
-        'bg-white rounded-2xl border border-gray-100 shadow-card',
-        hover && 'cursor-pointer hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200',
+        'rounded-3xl border border-cream-300 shadow-card',
+        glass ? 'glass-rose' : 'bg-white',
+        hover && 'cursor-pointer hover:shadow-rose hover:-translate-y-1 transition-all duration-300',
         className,
       )}
     >
@@ -24,7 +26,7 @@ export function Card({ children, className, hover, onClick }: CardProps) {
 }
 
 export function CardHeader({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('px-6 pt-6 pb-4 border-b border-gray-100', className)}>{children}</div>;
+  return <div className={cn('px-6 pt-6 pb-4 border-b border-cream-200', className)}>{children}</div>;
 }
 
 export function CardBody({ children, className }: { children: ReactNode; className?: string }) {
@@ -32,5 +34,5 @@ export function CardBody({ children, className }: { children: ReactNode; classNa
 }
 
 export function CardFooter({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('px-6 pt-4 pb-6 border-t border-gray-100', className)}>{children}</div>;
+  return <div className={cn('px-6 pt-4 pb-6 border-t border-cream-200', className)}>{children}</div>;
 }

@@ -10,16 +10,16 @@ import toast from 'react-hot-toast';
 interface NavItem { label: string; to: string; icon: React.ReactNode }
 
 const BUSINESS_NAV: NavItem[] = [
-  { label: 'Dashboard',   to: '/dashboard',   icon: <LayoutDashboard size={18} /> },
-  { label: 'Kalender',    to: '/dashboard/calendar',   icon: <Calendar size={18} /> },
-  { label: 'Dienste',     to: '/dashboard/services',   icon: <BookOpen size={18} /> },
-  { label: 'Mitarbeiter', to: '/dashboard/employees',  icon: <Users size={18} /> },
-  { label: 'Einstellungen', to: '/dashboard/settings', icon: <Settings size={18} /> },
+  { label: 'Dashboard',     to: '/dashboard',            icon: <LayoutDashboard size={16} /> },
+  { label: 'Kalender',      to: '/dashboard/calendar',   icon: <Calendar size={16} /> },
+  { label: 'Dienste',       to: '/dashboard/services',   icon: <BookOpen size={16} /> },
+  { label: 'Mitarbeiter',   to: '/dashboard/employees',  icon: <Users size={16} /> },
+  { label: 'Einstellungen', to: '/dashboard/settings',   icon: <Settings size={16} /> },
 ];
 
 const CUSTOMER_NAV: NavItem[] = [
-  { label: 'Suchen',       to: '/search',      icon: <Search size={18} /> },
-  { label: 'Meine Termine', to: '/my-bookings', icon: <Calendar size={18} /> },
+  { label: 'Suchen',        to: '/search',       icon: <Search size={16} /> },
+  { label: 'Meine Termine', to: '/my-bookings',  icon: <Calendar size={16} /> },
 ];
 
 export function Header() {
@@ -29,35 +29,46 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const nav = role === 'business' ? BUSINESS_NAV : CUSTOMER_NAV;
+  const brand = primaryColor || '#c9a99a';
 
   const handleSignOut = async () => {
     await signOut();
-    toast.success('Abgemeldet');
+    toast.success('Auf Wiedersehen!');
     navigate('/');
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-40 glass border-b border-cream-300/60 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+
           {/* Logo */}
-          <Link to={user ? (role === 'business' ? '/dashboard' : '/search') : '/'} className="flex items-center gap-2 font-bold text-lg">
+          <Link
+            to={user ? (role === 'business' ? '/dashboard' : '/search') : '/'}
+            className="flex items-center gap-2.5 group"
+          >
             {businessLogo
-              ? <img src={businessLogo} alt={businessName} className="h-8 w-8 rounded-lg object-cover" />
-              : <div className="h-8 w-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
-                     style={{ backgroundColor: primaryColor }}>B</div>
+              ? <img src={businessLogo} alt={businessName} className="h-8 w-8 rounded-xl object-cover" />
+              : <div
+                  className="h-8 w-8 rounded-xl flex items-center justify-center text-white text-sm font-bold shadow-rose"
+                  style={{ background: `linear-gradient(135deg, ${brand}, ${brand}cc)` }}
+                >
+                  {businessName?.[0] || 'B'}
+                </div>
             }
-            <span className="text-navy-700">{businessName}</span>
+            <span className="font-display font-semibold text-mauve-900 group-hover:text-rose-600 transition-colors">
+              {businessName}
+            </span>
           </Link>
 
           {/* Desktop Nav */}
           {user && (
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-0.5">
               {nav.map(item => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-navy-50 hover:text-navy-700 transition-colors"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm text-mauve-500 hover:bg-cream-200 hover:text-mauve-800 transition-all"
                 >
                   {item.icon}
                   {item.label}
@@ -70,17 +81,17 @@ export function Header() {
           <div className="flex items-center gap-2">
             {user ? (
               <>
-                <div className="hidden sm:flex items-center gap-2 text-sm text-gray-600">
-                  <div className="h-8 w-8 rounded-full bg-navy-100 flex items-center justify-center text-navy-700 font-medium text-xs">
-                    {user.displayName?.[0]?.toUpperCase() || <User size={14} />}
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream-100 border border-cream-300">
+                  <div className="h-6 w-6 rounded-full bg-rose-gradient flex items-center justify-center text-white text-xs font-semibold">
+                    {user.displayName?.[0]?.toUpperCase() || <User size={12} />}
                   </div>
+                  <span className="text-xs text-mauve-600 font-medium">{user.displayName?.split(' ')[0]}</span>
                 </div>
-                <Button variant="ghost" size="sm" onClick={handleSignOut} className="hidden sm:flex">
-                  <LogOut size={16} />
-                  Abmelden
+                <Button variant="ghost" size="sm" onClick={handleSignOut} className="hidden sm:flex text-mauve-400 hover:text-rose-600">
+                  <LogOut size={14} />
                 </Button>
                 <button
-                  className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+                  className="md:hidden p-2 rounded-xl hover:bg-cream-200 text-mauve-600"
                   onClick={() => setMenuOpen(!menuOpen)}
                 >
                   {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -89,7 +100,7 @@ export function Header() {
             ) : (
               <div className="flex items-center gap-2">
                 <Link to="/login"><Button variant="ghost" size="sm">Anmelden</Button></Link>
-                <Link to="/register"><Button size="sm">Kostenlos starten</Button></Link>
+                <Link to="/register"><Button size="sm">Starten</Button></Link>
               </div>
             )}
           </div>
@@ -98,23 +109,22 @@ export function Header() {
 
       {/* Mobile menu */}
       {menuOpen && user && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-1 animate-fade-in">
+        <div className="md:hidden bg-cream-50/95 backdrop-blur-sm border-t border-cream-300/60 px-4 py-3 space-y-1 animate-fade-in">
           {nav.map(item => (
             <Link
               key={item.to}
               to={item.to}
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-navy-50 hover:text-navy-700"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm text-mauve-600 hover:bg-cream-200 hover:text-mauve-900 transition-all"
             >
-              {item.icon}
-              {item.label}
+              {item.icon} {item.label}
             </Link>
           ))}
           <button
             onClick={handleSignOut}
-            className="flex w-full items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-red-600 hover:bg-red-50 mt-2"
+            className="flex w-full items-center gap-2 px-4 py-2.5 rounded-2xl text-sm text-red-400 hover:bg-red-50 mt-2"
           >
-            <LogOut size={18} /> Abmelden
+            <LogOut size={16} /> Abmelden
           </button>
         </div>
       )}

@@ -48,10 +48,10 @@ export function isValidEmail(email: string): boolean {
 }
 
 export const statusColors: Record<string, string> = {
-  pending: 'bg-amber-100 text-amber-800',
-  confirmed: 'bg-blue-100 text-blue-800',
-  completed: 'bg-green-100 text-green-800',
-  cancelled: 'bg-red-100 text-red-800',
+  pending:   'bg-cream-200 text-mauve-600 border border-cream-300',
+  confirmed: 'bg-rose-100 text-rose-700 border border-rose-200',
+  completed: 'bg-green-50 text-green-700 border border-green-200',
+  cancelled: 'bg-red-50 text-red-500 border border-red-200',
 };
 
 export const statusLabels: Record<string, string> = {

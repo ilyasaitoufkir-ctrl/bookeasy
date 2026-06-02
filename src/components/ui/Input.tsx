@@ -13,25 +13,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, hint, leftIcon, rightIcon, id, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={inputId} className="text-sm font-medium text-gray-700">
+          <label htmlFor={inputId} className="text-xs font-medium text-mauve-600 uppercase tracking-wider">
             {label}
           </label>
         )}
         <div className="relative">
           {leftIcon && (
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">{leftIcon}</span>
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-rose-400">{leftIcon}</span>
           )}
           <input
             ref={ref}
             id={inputId}
             className={cn(
-              'w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm',
-              'placeholder:text-gray-400 transition-colors duration-150',
-              'focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-navy-500',
-              'disabled:bg-gray-50 disabled:text-gray-500',
-              error && 'border-red-400 focus:ring-red-400',
+              'w-full rounded-2xl border border-cream-300 bg-white px-4 py-3 text-sm text-mauve-900',
+              'placeholder:text-rose-300 transition-all duration-200',
+              'focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400',
+              'disabled:bg-cream-100 disabled:text-mauve-400',
+              error && 'border-red-300 focus:ring-red-300/40',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
               className,
@@ -39,11 +39,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {rightIcon && (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">{rightIcon}</span>
+            <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-rose-400">{rightIcon}</span>
           )}
         </div>
-        {error && <p className="text-xs text-red-500">{error}</p>}
-        {hint && !error && <p className="text-xs text-gray-500">{hint}</p>}
+        {error && <p className="text-xs text-red-400">{error}</p>}
+        {hint && !error && <p className="text-xs text-mauve-400">{hint}</p>}
       </div>
     );
   },
@@ -60,22 +60,22 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, error, options, id, className, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
     return (
-      <div className="flex flex-col gap-1">
-        {label && <label htmlFor={inputId} className="text-sm font-medium text-gray-700">{label}</label>}
+      <div className="flex flex-col gap-1.5">
+        {label && <label htmlFor={inputId} className="text-xs font-medium text-mauve-600 uppercase tracking-wider">{label}</label>}
         <select
           ref={ref}
           id={inputId}
           className={cn(
-            'w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm',
-            'focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-navy-500',
-            error && 'border-red-400',
+            'w-full rounded-2xl border border-cream-300 bg-white px-4 py-3 text-sm text-mauve-900',
+            'focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400',
+            error && 'border-red-300',
             className,
           )}
           {...props}
         >
           {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        {error && <p className="text-xs text-red-400">{error}</p>}
       </div>
     );
   },
@@ -91,21 +91,21 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, error, id, className, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
     return (
-      <div className="flex flex-col gap-1">
-        {label && <label htmlFor={inputId} className="text-sm font-medium text-gray-700">{label}</label>}
+      <div className="flex flex-col gap-1.5">
+        {label && <label htmlFor={inputId} className="text-xs font-medium text-mauve-600 uppercase tracking-wider">{label}</label>}
         <textarea
           ref={ref}
           id={inputId}
           className={cn(
-            'w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm',
-            'focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-navy-500 resize-none',
-            error && 'border-red-400',
+            'w-full rounded-2xl border border-cream-300 bg-white px-4 py-3 text-sm text-mauve-900 resize-none',
+            'placeholder:text-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400',
+            error && 'border-red-300',
             className,
           )}
           rows={3}
           {...props}
         />
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        {error && <p className="text-xs text-red-400">{error}</p>}
       </div>
     );
   },
