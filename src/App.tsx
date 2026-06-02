@@ -34,7 +34,7 @@ function RoleRedirect() {
 }
 
 export default function App() {
-  const { loading } = useAuth();
+  const { user, loading } = useAuth();
   if (loading) return <PageLoader />;
 
   return (

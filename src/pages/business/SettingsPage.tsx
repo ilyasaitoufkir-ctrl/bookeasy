@@ -8,7 +8,7 @@ import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { useBusiness } from '../../hooks/useBusiness';
 import { updateBusiness, uploadBusinessLogo } from '../../services/firebase/businesses';
 import { useTheme } from '../../context/ThemeContext';
-import { BUSINESS_CATEGORIES, DAY_NAMES, PLAN_LIMITS, type OpeningHours } from '../../types';
+import { BUSINESS_CATEGORIES, DAY_NAMES, PLAN_LIMITS, type Business, type OpeningHours } from '../../types';
 
 import toast from 'react-hot-toast';
 
@@ -21,7 +21,7 @@ const TIMES = Array.from({ length: 48 }, (_, i) => {
 export default function SettingsPage() {
   const { business, setBusiness, loading } = useBusiness();
   const { setTheme } = useTheme();
-  const [form, setForm]     = useState<Partial<typeof business>>({});
+  const [form, setForm]     = useState<Partial<Business>>({});
   const [saving, setSaving] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 

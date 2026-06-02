@@ -7,7 +7,7 @@ import type { Booking, BlockedTime, BookingStatus } from '../../types';
 
 function convertBooking(data: Record<string, unknown>): Booking {
   return {
-    ...(data as Booking),
+    ...(data as unknown as Booking),
     startTime: data.startTime instanceof Timestamp ? data.startTime.toDate() : new Date(data.startTime as string),
     endTime:   data.endTime   instanceof Timestamp ? data.endTime.toDate()   : new Date(data.endTime   as string),
     createdAt: data.createdAt instanceof Timestamp ? data.createdAt.toDate() : new Date(data.createdAt as string),
