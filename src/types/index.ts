@@ -74,7 +74,7 @@ export interface DaySchedule {
 export interface Booking {
   id: string;
   businessId: string;
-  customerId: string;
+  customerId?: string;
   customerName: string;
   customerEmail: string;
   customerPhone: string;

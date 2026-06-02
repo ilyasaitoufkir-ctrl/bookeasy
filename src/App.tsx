@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { PageLoader } from './components/ui/LoadingSpinner';
 
@@ -35,13 +34,7 @@ function RoleRedirect() {
 }
 
 export default function App() {
-  const { user, role, loading } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Redirect after login based on role
-  }, [user, role]);
-
+  const { loading } = useAuth();
   if (loading) return <PageLoader />;
 
   return (

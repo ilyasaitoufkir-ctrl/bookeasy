@@ -14,7 +14,7 @@ function convertBooking(data: Record<string, unknown>): Booking {
   };
 }
 
-export async function createBooking(booking: Omit<Booking, 'id' | 'createdAt'>): Promise<Booking> {
+export async function createBooking(booking: Omit<Booking, 'id' | 'createdAt' | 'customerId'> & { customerId?: string }): Promise<Booking> {
   const id = doc(collection(db, 'bookings')).id;
   const data = { ...booking, id, createdAt: serverTimestamp() };
   await setDoc(doc(db, 'bookings', id), data);
